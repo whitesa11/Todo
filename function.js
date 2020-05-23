@@ -39,11 +39,16 @@ const displayTodos = () => {
     const cellForComment = newRow.insertCell(1);
     const cellForWorking = newRow.insertCell(2);
     const cellForDelete = newRow.insertCell(3);
-    Object.keys(todos).forEach((key) => {
-        let comment = document.createTextNode(todos[key].task);    
+    todos.forEach((element) => {
+        let comment = document.createTextNode(element.task);
         cellForComment.appendChild(comment);
-        console.log(todos);
-    });  
+        //console.log(element);
+    });
+    // Object.keys(todos).forEach((key) => {
+    //     let comment = document.createTextNode(todos[key].task);    
+    //     cellForComment.appendChild(comment);
+    //     console.log(todos);
+    // });  
     //cellForidにデータを入れる。DOM操作：appendChild
     let id = document.createTextNode(todos.length - 1);
     cellForId.appendChild(id);
