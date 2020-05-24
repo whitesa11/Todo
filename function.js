@@ -3,9 +3,8 @@ const todos = [];
 const add = document.getElementById("btn-add");　//追加ボタンのID取得 → 入力値を得るため
 const table = document.getElementById("insert")　//table のID取得 html内にテーブル作成
 
-add.addEventListener("click", () => {
-    addTodo();
-    displayTodos();
+add.addEventListener("click", () => {  
+    addTodo();  
 });
 
 const addTodo = () =>{
@@ -15,6 +14,7 @@ const addTodo = () =>{
         status: "作業中"
     }
     todos.push(todo);
+    displayTodos();
 }
 
 const createWorkingBtn = () => {
@@ -26,7 +26,7 @@ const createWorkingBtn = () => {
     return workingBtn;
 }
 
-const createDeleteBtn = () => {
+const createDeleteBtn = () => {　
     const deleteBtn = document.createElement("input");
     deleteBtn.type = "button";
     deleteBtn.value = "削除";
@@ -39,22 +39,19 @@ const displayTodos = () => {
     const cellForComment = newRow.insertCell(1);
     const cellForWorking = newRow.insertCell(2);
     const cellForDelete = newRow.insertCell(3);
-    todos.forEach((element) => {
-        let comment = document.createTextNode(element.task);
+    todos.forEach(todo => {   
+        let comment = document.createTextNode(todo.task); 
+        cellForComment.textContent = null; //一旦前回のセルのテキストをクリア
         cellForComment.appendChild(comment);
-        //console.log(element);
     });
-    // Object.keys(todos).forEach((key) => {
-    //     let comment = document.createTextNode(todos[key].task);    
-    //     cellForComment.appendChild(comment);
-    //     console.log(todos);
-    // });  
-    //cellForidにデータを入れる。DOM操作：appendChild
+    
+    //ボタン追加
+    const wBtn = createWorkingBtn();
+    const dBtn = createDeleteBtn();
     let id = document.createTextNode(todos.length - 1);
     cellForId.appendChild(id);
-    cellForWorking.appendChild(createWorkingBtn());
-    cellForDelete.appendChild(createDeleteBtn());
-    
+    cellForWorking.appendChild(wBtn);
+    cellForDelete.appendChild(dBtn);
 }
 
 
