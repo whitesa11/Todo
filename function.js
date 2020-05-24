@@ -9,12 +9,13 @@ add.addEventListener("click", () => {
 
 const addTodo = () =>{
     let input = document.getElementById("input").value; //入力値を取得
+    document.getElementById("input").value = ""; //テキストボックスを空欄に戻す
     const todo = { //オブジェクト作成、格納
         task: input,
         status: "作業中"
     }
     todos.push(todo);
-    displayTodos();
+    displayTodos(); 
 }
 
 const createWorkingBtn = () => {
