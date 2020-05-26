@@ -5,14 +5,29 @@
   </head>
   <body>
     <header><h1>ToDo リスト</h1></header>
-    <input type="radio" name="progress" value="all" checked />すべて
-    <input type="radio" name="progress" value="working" />作業中
-    <input type="radio" name="progress" value="done" />完了
-    <h2>新規タスクの追加</h2>
-    <input type="text" name="todo" value="" /><button
-      value="追加"
-      style="margin-left: 8px;"
-    >
+    <section>
+      <input type="radio" name="progress" value="all" checked /><label
+        >すべて</label
+      >
+      <input type="radio" name="progress" value="working" /><label
+        >作業中</label
+      >
+      <input type="radio" name="progress" value="done" /><label>完了</label>
+    </section>
+    <section>
+      <table id="insert">
+        <tr>
+          <th id="id" style="font-weight: 18px; line-height: 2.4rem;">ID</th>
+          <th id="comment" style="font-size: 18px; line-height: 2.4rem;">
+            コメント
+          </th>
+          <th id="state" style="font-size: 18px; line-height: 2.4rem;">状態</th>
+        </tr>
+      </table>
+    </section>
+    <h2 style="margin-bottom: 0;">新規タスクの追加</h2>
+    <input type="text" name="todo" value="" id="input" />
+    <button value="追加" style="margin-left: 8px;" id="btn-add">
       追加
     </button>
     <script src="function.js"></script>
