@@ -48,25 +48,27 @@ const displayTodos = () => {
         cellForComment.appendChild(comment);
         const id = document.createTextNode(index);  //インデックス値をテキストノードにしないとappendChildしてテキストで表示できない
         cellForId.appendChild(id);
-        console.log(index);
+        //console.log(index);
+
     });  
     //ボタン追加
     const wBtn = createWorkingBtn();
     const dBtn = createDeleteBtn();
     cellForWorking.appendChild(wBtn);
     cellForDelete.appendChild(dBtn);
-    deleteTodo(); 
+    deleteTodo();
 }
 
 const daleteTodoItem = document.getElementsByClassName("delete");
 function deleteTodo(){
 for (let i = 0; i < daleteTodoItem.length; i++) {
-    daleteTodoItem[i].addEventListener('click', deleteListItem, false);
+    daleteTodoItem[i].addEventListener('click', deleteListItem, false); 
 };
 };
 
-function deleteListItem () {
+function deleteListItem (index) {
     let tr = this.parentNode.parentNode; //押したボタンの行を取得
+    console.log(tr.sectionRowIndex);
     tr.parentNode.deleteRow(tr.sectionRowIndex); //その行のインデックスを取得して削除
     todos.splice(todos[tr], 1); //Todos配列からそのインデックスのオブジェクトを削除
 };
