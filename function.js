@@ -41,22 +41,25 @@ const displayTodos = () => {
     const cellForComment = newRow.insertCell(1);
     const cellForWorking = newRow.insertCell(2);
     const cellForDelete = newRow.insertCell(3);
-    todos.forEach((item, index) => {   
-    const comment = document.createTextNode(item.task); 
-        cellForComment.textContent = null;//一旦前回のセルのテキストをクリア
-        cellForId.textContent = null; 
+    todos.forEach((item, index) => { 
+        //一旦前回のセルのテキストをクリア
+        cellForComment.textContent = null;
+        cellForId.textContent = null;
+        cellForWorking.textContent = null;
+        cellForDelete.textContent = null;  
+        const comment = document.createTextNode(item.task); 
         cellForComment.appendChild(comment);
         const id = document.createTextNode(index);  //インデックス値をテキストノードにしないとappendChildしてテキストで表示できない
         cellForId.appendChild(id);
-        //console.log(index);
-
+        //ボタン追加
+        const wBtn = createWorkingBtn();
+        const dBtn = createDeleteBtn();
+        cellForWorking.appendChild(wBtn);
+        cellForDelete.appendChild(dBtn);
+        deleteTodo(index);
+        console.log(id);
     });  
-    //ボタン追加
-    const wBtn = createWorkingBtn();
-    const dBtn = createDeleteBtn();
-    cellForWorking.appendChild(wBtn);
-    cellForDelete.appendChild(dBtn);
-    deleteTodo();
+    
 }
 
 const daleteTodoItem = document.getElementsByClassName("delete");
@@ -67,10 +70,10 @@ for (let i = 0; i < daleteTodoItem.length; i++) {
 };
 
 function deleteListItem (index) {
-    let tr = this.parentNode.parentNode; //押したボタンの行を取得
-    console.log(tr.sectionRowIndex);
+    let tr = this.parentNode.parentNode; //押したボタンのtrを取得
     tr.parentNode.deleteRow(tr.sectionRowIndex); //その行のインデックスを取得して削除
     todos.splice(todos[tr], 1); //Todos配列からそのインデックスのオブジェクトを削除
+    displayTodos();
 };
 
 
