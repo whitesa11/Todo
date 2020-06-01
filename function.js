@@ -1,7 +1,8 @@
 
 const todos = [];
 const add = document.getElementById("btn-add");　//追加ボタンのID取得 → 入力値を得るため
-const table = document.getElementById("insert")　//table のID取得 html内にテーブル作成
+const table = document.getElementById("insert");　//table のID取得 html内にテーブル作成
+const tBody = document.getElementById("todorow");
 
 add.addEventListener("click", () => { 
     addTodo();
@@ -23,7 +24,7 @@ const createWorkingBtn = () => {
     //ボタンにクリックイベントを追加する時など、扱いやすくなる。
     const workingBtn = document.createElement("input");
     workingBtn.type = "button"; // workingBtn.type = string →　input type設定
-    workingBtn.value = "作業中";  //input value設定
+    workingBtn.value = "作業中"; //input value設定
     return workingBtn;
 }
 
@@ -36,17 +37,21 @@ const createDeleteBtn = () => {　
 }
 
 const displayTodos = () => {
-    const newRow = table.insertRow(-1); //末に行を追加する　0だと最初の行に追加
-    const cellForId = newRow.insertCell(0);　//追加した行にセル追加 0で一番初めのセル
-    const cellForComment = newRow.insertCell(1);
-    const cellForWorking = newRow.insertCell(2);
-    const cellForDelete = newRow.insertCell(3);
+    //一旦全てのTodoをクリア
+    tBody.textContent = null;
+    // while (tBody.firstChild) {
+    //     tBody.removeChild(tBody.firstChild);
+    // };
     todos.forEach((item, index) => { 
-        //一旦前回のセルのテキストをクリア
-        cellForComment.textContent = null;
+        const newRow = tBody.insertRow(-1); //末に行を追加する　0だと最初の行に追加。ボタンを押すたびに新らしく行を作って追加
+        const cellForId = newRow.insertCell(0);　//追加した行にセル追加 0で一番初めのセル
+        const cellForComment = newRow.insertCell(1);
+        const cellForWorking = newRow.insertCell(2);
+        const cellForDelete = newRow.insertCell(3);
         cellForId.textContent = null;
+        cellForComment.textContent = null;
         cellForWorking.textContent = null;
-        cellForDelete.textContent = null;  
+        cellForDelete.textContent = null;
         const comment = document.createTextNode(item.task); 
         cellForComment.appendChild(comment);
         const id = document.createTextNode(index);  //インデックス値をテキストノードにしないとappendChildしてテキストで表示できない
@@ -56,8 +61,7 @@ const displayTodos = () => {
         const dBtn = createDeleteBtn();
         cellForWorking.appendChild(wBtn);
         cellForDelete.appendChild(dBtn);
-        deleteTodo(index);
-        console.log(id);
+        deleteTodo(index);　//index を渡すことで、配列のインデックスを取得
     });  
     
 }
@@ -73,7 +77,7 @@ function deleteListItem (index) {
     let tr = this.parentNode.parentNode; //押したボタンのtrを取得
     tr.parentNode.deleteRow(tr.sectionRowIndex); //その行のインデックスを取得して削除
     todos.splice(todos[tr], 1); //Todos配列からそのインデックスのオブジェクトを削除
-    displayTodos();
+    displayTodos(); //削除後のIDを再取得、再表示させるため
 };
 
 
