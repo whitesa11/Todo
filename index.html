@@ -16,13 +16,19 @@
     </section>
     <section>
       <table id="insert">
-        <tr>
-          <th id="id" style="font-weight: 18px; line-height: 2.4rem;">ID</th>
-          <th id="comment" style="font-size: 18px; line-height: 2.4rem;">
-            コメント
-          </th>
-          <th id="state" style="font-size: 18px; line-height: 2.4rem;">状態</th>
-        </tr>
+        <thead>
+          <tr>
+            <th id="id" style="font-weight: 18px; line-height: 2.4rem;">ID</th>
+            <th id="comment" style="font-size: 18px; line-height: 2.4rem;">
+              コメント
+            </th>
+            <th id="state" style="font-size: 18px; line-height: 2.4rem;">
+              状態
+            </th>
+          </tr>
+        </thead>
+        <tbody id="todorow"></tbody>
+        <!--<tbody>とは、表の一連の行 (<tr> 要素) を内包し、その部分が表 (<table>) の本体部分を構成することを表します。-->
       </table>
     </section>
     <h2 style="margin-bottom: 0;">新規タスクの追加</h2>
